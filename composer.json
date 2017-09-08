@@ -1,0 +1,28 @@
+{
+    "name": "fetzi/phpspec-watcher",
+    "authors": [
+        {
+            "name": "Johannes Pichler",
+            "email": "github@johannespichler.com"
+        }
+    ],
+    "require": {
+        "jolicode/jolinotif": "^1.2",
+        "react/event-loop": "^0.4.3",
+        "symfony/console": "^3.3",
+        "symfony/process": "^3.3",
+        "symfony/yaml": "^3.3",
+        "yosymfony/resource-watcher": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fetzi\\PhpspecWatcher\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "bin": [
+        "phpspec-watcher"
+    ]
+}

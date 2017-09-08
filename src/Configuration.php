@@ -37,14 +37,14 @@ class Configuration
 
     public static function getConfigPath()
     {
-        return getcwd() . '/' . self::CONFIGURATION_FILE;
+        return getcwd().'/'.self::CONFIGURATION_FILE;
     }
 
     private static function makeAbsolutePaths($config)
     {
         $directories = array_map(
-            function($item) {
-                return getcwd() . '/' . $item;
+            function ($item) {
+                return getcwd().'/'.$item;
             },
             $config['directories']
         );
@@ -59,18 +59,18 @@ class Configuration
     private static function mergeDefaults($config)
     {
         $defaults = [
-            'fileMask' => '*.php',
+            'fileMask'      => '*.php',
             'checkInterval' => 1.0,
-            'directories' => [
+            'directories'   => [
                 'app',
                 'src',
                 'tests',
             ],
             'phpspecBinary' => 'vendor/bin/phpspec',
             'notifications' => [
-                'onError' => true,
+                'onError'   => true,
                 'onSuccess' => false,
-            ]
+            ],
         ];
 
         return $config + $defaults;

@@ -29,6 +29,4 @@ class InitCommand extends Command
             $io->error('Configuration file already exists!');
         }
     }
-
-
 }

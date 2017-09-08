@@ -39,7 +39,7 @@ class Watcher
         $this->io = $io;
         $this->options = $options;
 
-        $this->finder =  new Finder();
+        $this->finder = new Finder();
         $this->finder
             ->files()
             ->in($options['directories'])
@@ -55,7 +55,7 @@ class Watcher
         $resourceWatcher = new ResourceWatcher($resourceCache);
         $resourceWatcher->setFinder($this->finder);
 
-        $this->loop->addPeriodicTimer($this->options['checkInterval'], function() use ($resourceWatcher) {
+        $this->loop->addPeriodicTimer($this->options['checkInterval'], function () use ($resourceWatcher) {
             $resourceWatcher->findChanges();
 
             if ($resourceWatcher->hasChanges()) {
@@ -90,7 +90,7 @@ class Watcher
             $notification = (new Notification())
                 ->setTitle('PHPSpec Watcher')
                 ->setBody('Tests passed')
-                ->setIcon(__DIR__ . '/../assets/success.png');
+                ->setIcon(__DIR__.'/../assets/success.png');
 
             $this->notifier->send($notification);
         }
@@ -102,7 +102,7 @@ class Watcher
             $notification = (new Notification())
                 ->setTitle('PHPSpec Watcher')
                 ->setBody('Tests failed')
-                ->setIcon(__DIR__ . '/../assets/error.png');
+                ->setIcon(__DIR__.'/../assets/error.png');
 
             $this->notifier->send($notification);
         }

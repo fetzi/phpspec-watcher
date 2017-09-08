@@ -1,11 +1,16 @@
 {
     "name": "fetzi/phpspec-watcher",
+    "description": "phpspec-watcher is a cli tool for the automatic execution of phpspec tests when code changes",
     "authors": [
         {
             "name": "Johannes Pichler",
-            "email": "github@johannespichler.com"
+            "email": "github@johannespichler.com",
+            "homepage": "https://johannespichler.com",
+            "role": "Maintainer"
         }
     ],
+    "license": "MIT",
+    "homepage": "https://github.com/fetzi/phpspec-watcher",
     "require": {
         "jolicode/jolinotif": "^1.2",
         "react/event-loop": "^0.4.3",

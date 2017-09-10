@@ -48,7 +48,7 @@ class Watcher
 
     public function start()
     {
-        $resourceCache = new ResourceCacheMemory;
+        $resourceCache = new ResourceCacheMemory();
         $resourceWatcher = new ResourceWatcher($resourceCache);
         $resourceWatcher->setFinder($this->finder);
 

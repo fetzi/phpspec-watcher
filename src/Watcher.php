@@ -2,8 +2,6 @@
 
 namespace Fetzi\PhpspecWatcher;
 
-use Joli\JoliNotif\Notification;
-use Joli\JoliNotif\NotifierFactory;
 use React\EventLoop\Factory;
 use React\EventLoop\LoopInterface;
 use Symfony\Component\Console\Style\OutputStyle;
@@ -46,7 +44,6 @@ class Watcher
             ->name($options['fileMask']);
 
         $this->loop = Factory::create();
-        $this->notifier = NotifierFactory::create();
     }
 
     public function start()
@@ -81,30 +78,26 @@ class Watcher
         );
         $process->setTty(true);
 
-        return $process->run() === 0;
+        return $process->isSuccessful();
     }
 
     private function notifySuccess()
     {
         if ($this->options['notifications']['onSuccess']) {
-            $notification = (new Notification())
-                ->setTitle('PHPSpec Watcher')
-                ->setBody('Tests passed')
-                ->setIcon(__DIR__.'/../assets/success.png');
-
-            $this->notifier->send($notification);
+            Notification::create(
+                'Tests passed',
+                __DIR__.'/../assets/success.png'
+            )->send();
         }
     }
 
     private function notifyError()
     {
         if ($this->options['notifications']['onError']) {
-            $notification = (new Notification())
-                ->setTitle('PHPSpec Watcher')
-                ->setBody('Tests failed')
-                ->setIcon(__DIR__.'/../assets/error.png');
-
-            $this->notifier->send($notification);
+            Notification::create(
+                'Tests failed',
+                __DIR__.'/../assets/error.png'
+            )->send();
         }
     }
 }

@@ -13,7 +13,7 @@ class InitCommand extends Command
     protected function configure()
     {
         $this->setName('init')
-            ->setDescription('initializes the phpspec watcher configuration file in the current working directory');
+            ->setDescription('initializes the phpspec watcher configuration file in the current working directory with the default values.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

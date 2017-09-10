@@ -86,5 +86,11 @@ class Configuration
                 )
             );
         }
+
+        if (empty($config['directories'])) {
+            throw new InvalidConfigurationException(
+                'No watch directory available'
+            );
+        }
     }
 }

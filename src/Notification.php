@@ -9,7 +9,7 @@ class Notification
     private $body;
     private $icon;
 
-    public static function create(string $body, string $icon)
+    public static function create(string $body, string $icon) : Notification
     {
         return new static($body, $icon);
     }

@@ -9,7 +9,7 @@ class Configuration
 {
     const CONFIGURATION_FILE = '.phpspec-watcher.yml';
 
-    public static function load()
+    public static function load() : array
     {
         $config = [];
 
@@ -25,7 +25,7 @@ class Configuration
         return $config;
     }
 
-    public static function exists()
+    public static function exists() : bool
     {
         return file_exists(self::getConfigPath());
     }
@@ -35,12 +35,12 @@ class Configuration
         file_put_contents(self::getConfigPath(), Yaml::dump(self::mergeDefaults([])));
     }
 
-    public static function getConfigPath()
+    public static function getConfigPath() : string
     {
         return getcwd().'/'.self::CONFIGURATION_FILE;
     }
 
-    private static function makeAbsolutePaths($config)
+    private static function makeAbsolutePaths($config) : array
     {
         $directories = array_map(
             function ($item) {
@@ -56,7 +56,7 @@ class Configuration
         return $config;
     }
 
-    private static function mergeDefaults($config)
+    private static function mergeDefaults($config) : array
     {
         $defaults = [
             'fileMask'      => '*.php',

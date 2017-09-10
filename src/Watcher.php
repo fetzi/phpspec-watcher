@@ -48,7 +48,7 @@ class Watcher
 
     public function start()
     {
-        $resourceCache = new ResourceCacheMemory();
+        $resourceCache = new ResourceCacheMemory;
         $resourceWatcher = new ResourceWatcher($resourceCache);
         $resourceWatcher->setFinder($this->finder);
 
@@ -71,7 +71,7 @@ class Watcher
         $this->loop->run();
     }
 
-    private function runTests()
+    private function runTests() : bool
     {
         $process = new Process(
             sprintf('%s run', $this->options['phpspecBinary'])

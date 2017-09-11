@@ -28,22 +28,42 @@ class Watcher
     private $loop;
 
     /**
-     * @var array
+     * @var int
      */
-    private $options;
+    private $checkInterval;
 
-    public function __construct(OutputStyle $output, array $options)
+    /**
+     * @var string
+     */
+    private $phpspecCommand;
+
+    /**
+     * @var bool
+     */
+    private $notifyOnSuccess;
+
+    /**
+     * @var bool
+     */
+    private $notifyOnError;
+
+    public function __construct(
+        OutputStyle $output,
+        Finder $finder,
+        LoopInterface $loop,
+        int $checkInterval,
+        string $phpspecCommand,
+        bool $notifyOnSuccess,
+        bool $notifyOnError
+    )
     {
         $this->output = $output;
-        $this->options = $options;
-
-        $this->finder = new Finder();
-        $this->finder
-            ->files()
-            ->in($options['directories'])
-            ->name($options['fileMask']);
-
-        $this->loop = Factory::create();
+        $this->finder = $finder;
+        $this->loop = $loop;
+        $this->checkInterval = $checkInterval;
+        $this->phpspecCommand = $phpspecCommand;
+        $this->notifyOnSuccess = $notifyOnSuccess;
+        $this->notifyOnError = $notifyOnError;
     }
 
     public function start()
@@ -52,7 +72,7 @@ class Watcher
         $resourceWatcher = new ResourceWatcher($resourceCache);
         $resourceWatcher->setFinder($this->finder);
 
-        $this->loop->addPeriodicTimer($this->options['checkInterval'], function () use ($resourceWatcher) {
+        $this->loop->addPeriodicTimer($this->checkInterval, function () use ($resourceWatcher) {
             $resourceWatcher->findChanges();
 
             if ($resourceWatcher->hasChanges()) {
@@ -73,30 +93,29 @@ class Watcher
 
     private function runTests() : bool
     {
-        $process = new Process(
-            sprintf('%s run', $this->options['phpspecBinary'])
-        );
+        $process = new Process($this->phpspecCommand);
         $process->setTty(true);
+        $process->run();
 
         return $process->isSuccessful();
     }
 
     private function notifySuccess()
     {
-        if ($this->options['notifications']['onSuccess']) {
+        if ($this->notifyOnSuccess) {
             Notification::create(
                 'Tests passed',
-                __DIR__.'/../assets/success.png'
+                Notification::ICON_SUCCESS
             )->send();
         }
     }
 
     private function notifyError()
     {
-        if ($this->options['notifications']['onError']) {
+        if ($this->notifyOnError) {
             Notification::create(
                 'Tests failed',
-                __DIR__.'/../assets/error.png'
+                Notification::ICON_ERROR
             )->send();
         }
     }

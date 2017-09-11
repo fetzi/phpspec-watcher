@@ -6,6 +6,9 @@ use Joli\JoliNotif\NotifierFactory;
 
 class Notification
 {
+    const ICON_SUCCESS = 'success.png';
+    const ICON_ERROR = 'error.png';
+
     private $body;
     private $icon;
 
@@ -26,7 +29,7 @@ class Notification
         $notification
             ->setTitle('PHPSpec Watcher')
             ->setBody($this->body)
-            ->setIcon($this->icon);
+            ->setIcon(__DIR__.'/../assets/'.$this->icon);
 
         NotifierFactory::create()->send($notification);
     }

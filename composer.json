@@ -14,9 +14,9 @@
     "require": {
         "jolicode/jolinotif": "^1.2",
         "react/event-loop": "^0.4.3",
-        "symfony/console": "^3.3",
-        "symfony/process": "^3.3",
-        "symfony/yaml": "^3.3",
+        "symfony/console": "^3.0",
+        "symfony/process": "^3.0",
+        "symfony/yaml": "^3.0",
         "yosymfony/resource-watcher": "^1.2"
     },
     "autoload": {

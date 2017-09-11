@@ -60,7 +60,7 @@ class Configuration
     {
         $defaults = [
             'fileMask'      => '*.php',
-            'checkInterval' => 1.0,
+            'checkInterval' => 1,
             'directories'   => [
                 'app',
                 'src',

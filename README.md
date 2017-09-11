@@ -65,6 +65,15 @@ To speed up the configuration thing there is an initialization command to bootst
 phpspec-watcher init
 ```
 
+## Notifications
+The watcher triggers operating system notifications after executing the test suite.
+
+To display the notification icons on Mac you need to install another notifier because AppleScript cannot display custom icons
+
+```
+brew install terminal-notifier
+```
+
 ## Credits
 The idea for creating this package was born after discovering the awesome [phpunit-watcher](https://github.com/spatie/phpunit-watcher) package by [Spatie](https://spatie.be).
 

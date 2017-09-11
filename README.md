@@ -4,7 +4,9 @@
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/fe3f8dba-15da-4527-a333-1a392d10673d.svg?style=flat-square)](https://insight.sensiolabs.com/projects/fe3f8dba-15da-4527-a333-1a392d10673d)
 [![Code Climate](https://img.shields.io/codeclimate/github/fetzi/phpspec-watcher.svg?style=flat-square)](https://codeclimate.com/github/fetzi/phpspec-watcher)
 
-Rerunning phpspec tests 
+
+## Introduction
+phpspec-watcher is a tool for automating phpspec test execution when the source code of a project changes. When saving a file in one of the defined directories the watcher automatically triggers the phpspec test suite and informs the developer about the test result.
 
 ## Installation
 This tool can be installed globally with

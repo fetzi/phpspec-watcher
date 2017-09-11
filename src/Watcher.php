@@ -15,7 +15,7 @@ class Watcher
     /**
      * @var OutputStyle
      */
-    private $io;
+    private $output;
 
     /**
      * @var Finder
@@ -32,9 +32,9 @@ class Watcher
      */
     private $options;
 
-    public function __construct(OutputStyle $io, array $options)
+    public function __construct(OutputStyle $output, array $options)
     {
-        $this->io = $io;
+        $this->output = $output;
         $this->options = $options;
 
         $this->finder = new Finder();
@@ -56,15 +56,15 @@ class Watcher
             $resourceWatcher->findChanges();
 
             if ($resourceWatcher->hasChanges()) {
-                $this->io->writeln('starting tests');
+                $this->output->writeln('starting tests');
                 if ($this->runTests()) {
                     $this->notifySuccess();
                 } else {
                     $this->notifyError();
                 }
 
-                $this->io->newLine(2);
-                $this->io->writeln('waiting for changes ...');
+                $this->output->newLine(2);
+                $this->output->writeln('waiting for changes ...');
             }
         });
 

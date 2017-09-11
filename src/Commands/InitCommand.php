@@ -13,20 +13,21 @@ class InitCommand extends Command
     protected function configure()
     {
         $this->setName('init')
-            ->setDescription('initializes the phpspec watcher configuration file in the current working directory with the default values.');
+            ->setDescription('initializes the phpspec watcher configuration file in the current working directory.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $io = new SymfonyStyle($input, $output);
+        $output = new SymfonyStyle($input, $output);
 
-        if (!Configuration::exists()) {
-            Configuration::initialize();
-            $io->success(
-                sprintf('Successfully created the configuration file %s', Configuration::getConfigPath())
-            );
-        } else {
-            $io->error('Configuration file already exists!');
+        if (Configuration::exists()) {
+            $output->error('Configuration file already exists!');
+            return;
         }
+
+        Configuration::initialize();
+        $output->success(
+            sprintf('Successfully created the configuration file %s', Configuration::getConfigPath())
+        );
     }
 }

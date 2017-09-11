@@ -20,16 +20,16 @@ class WatchCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $io = new SymfonyStyle($input, $output);
-        $this->displayInfo($io);
+        $output = new SymfonyStyle($input, $output);
+        $this->displayInfo($output);
 
-        (new Watcher($io, Configuration::load()))->start();
+        (new Watcher($output, Configuration::load()))->start();
     }
 
-    private function displayInfo(OutputStyle $io)
+    private function displayInfo(OutputStyle $output)
     {
-        $io->title('PHPSpec Watcher');
-        $io->text('PHPSpec tests will be automatically executed when a source or test file changes.');
-        $io->newLine();
+        $output->title('PHPSpec Watcher');
+        $output->text('PHPSpec tests will be automatically executed when a source or test file changes.');
+        $output->newLine();
     }
 }

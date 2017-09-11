@@ -12,6 +12,7 @@
     "license": "MIT",
     "homepage": "https://github.com/fetzi/phpspec-watcher",
     "require": {
+        "php": "^7.0",
         "jolicode/jolinotif": "^1.2",
         "react/event-loop": "^0.4.3",
         "symfony/console": "^3.0",

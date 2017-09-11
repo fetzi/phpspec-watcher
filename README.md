@@ -6,7 +6,7 @@
 
 
 ## Introduction
-phpspec-watcher is a tool for automating phpspec test execution when the source code of a project changes. When saving a file in one of the defined directories the watcher automatically triggers the phpspec test suite and informs the developer about the test result.
+phpspec-watcher is a tool for automating phpspec test execution when the source code of a project changes. On file save the watcher automatically triggers the phpspec test suite and informs the developer about the test results.
 
 ## Installation
 This tool can be installed globally with

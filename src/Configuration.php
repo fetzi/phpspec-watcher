@@ -70,7 +70,6 @@ class Configuration
                 'binary'    => 'vendor/bin/phpspec',
                 'arguments' => [
                     'format=dot',
-                    'stop-on-failure=false',
                 ],
             ],
             'notifications' => [

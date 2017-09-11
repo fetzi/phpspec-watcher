@@ -22,6 +22,7 @@ class InitCommand extends Command
 
         if (Configuration::exists()) {
             $output->error('Configuration file already exists!');
+
             return;
         }
 

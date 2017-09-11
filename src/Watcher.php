@@ -2,7 +2,6 @@
 
 namespace Fetzi\PhpspecWatcher;
 
-use React\EventLoop\Factory;
 use React\EventLoop\LoopInterface;
 use Symfony\Component\Console\Style\OutputStyle;
 use Symfony\Component\Finder\Finder;
@@ -55,8 +54,7 @@ class Watcher
         string $phpspecCommand,
         bool $notifyOnSuccess,
         bool $notifyOnError
-    )
-    {
+    ) {
         $this->output = $output;
         $this->finder = $finder;
         $this->loop = $loop;

@@ -18,7 +18,7 @@ class WatcherFactory
 
         $phpspecCommand = sprintf('%s run', $options['phpspec']['binary']);
 
-        foreach($options['phpspec']['arguments'] as $argument) {
+        foreach ($options['phpspec']['arguments'] as $argument) {
             $phpspecCommand .= sprintf(' --%s', $argument);
         }
 

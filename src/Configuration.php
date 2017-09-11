@@ -67,7 +67,7 @@ class Configuration
                 'spec',
             ],
             'phpspec' => [
-                'binary' => 'vendor/bin/phpspec',
+                'binary'    => 'vendor/bin/phpspec',
                 'arguments' => [
                     'format=dot',
                     'stop-on-failure=false',

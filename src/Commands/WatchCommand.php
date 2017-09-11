@@ -4,6 +4,7 @@ namespace Fetzi\PhpspecWatcher\Commands;
 
 use Fetzi\PhpspecWatcher\Configuration;
 use Fetzi\PhpspecWatcher\Watcher;
+use Fetzi\PhpspecWatcher\WatcherFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,7 +24,7 @@ class WatchCommand extends Command
         $output = new SymfonyStyle($input, $output);
         $this->displayInfo($output);
 
-        (new Watcher($output, Configuration::load()))->start();
+        WatcherFactory::create($output, Configuration::load())->start();
     }
 
     private function displayInfo(OutputStyle $output)

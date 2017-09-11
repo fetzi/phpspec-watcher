@@ -64,12 +64,18 @@ class Configuration
             'directories'   => [
                 'app',
                 'src',
-                'tests',
+                'spec',
             ],
-            'phpspecBinary' => 'vendor/bin/phpspec',
+            'phpspec' => [
+                'binary' => 'vendor/bin/phpspec',
+                'arguments' => [
+                    'format=dot',
+                    'stop-on-failure=false',
+                ],
+            ],
             'notifications' => [
                 'onError'   => true,
-                'onSuccess' => false,
+                'onSuccess' => true,
             ],
         ];
 
@@ -78,11 +84,11 @@ class Configuration
 
     private static function validate($config)
     {
-        if (!file_exists($config['phpspecBinary'])) {
+        if (!file_exists($config['phpspec']['binary'])) {
             throw new InvalidConfigurationException(
                 sprintf(
                     'phpspec binary cannot be found in %s',
-                    $config['phpspecBinary']
+                    $config['phpspec']['binary']
                 )
             );
         }

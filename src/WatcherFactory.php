@@ -16,7 +16,11 @@ class WatcherFactory
             ->in($options['directories'])
             ->name($options['fileMask']);
 
-        $phpspecCommand = sprintf('%s run', $options['phpspecBinary']);
+        $phpspecCommand = sprintf('%s run', $options['phpspec']['binary']);
+
+        foreach($options['phpspec']['arguments'] as $argument) {
+            $phpspecCommand .= sprintf(' --%s', $argument);
+        }
 
         return new Watcher(
             $output,

@@ -47,13 +47,15 @@ checkInterval: 1                    # a float value indicating the resource chec
 directories:                        # a list of directories that should be watched
     - app
     - src
-    - tests
+    - spec
     
-phpspecBinary: vendor/bin/phpspec   # the path to the phpspec binary
+phpspec:
+    binary: vendor/bin/phpspec      # path to the phpspec binary
+    arguments: [format=dot]         # additional phpspec arguments
 
 notifications:                      # flags for notfications on success and on error
     onError: true
-    onSuccess: false
+    onSuccess: true
 
 ```
 

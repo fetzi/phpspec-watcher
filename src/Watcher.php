@@ -75,11 +75,8 @@ class Watcher
 
             if ($resourceWatcher->hasChanges()) {
                 $this->output->writeln('starting tests');
-                if ($this->runTests()) {
-                    $this->notifySuccess();
-                } else {
-                    $this->notifyError();
-                }
+
+                $this->runTests();
 
                 $this->output->newLine();
                 $this->output->writeln('waiting for changes ...');
@@ -89,13 +86,19 @@ class Watcher
         $this->loop->run();
     }
 
-    private function runTests() : bool
+    private function runTests()
     {
         $process = new Process($this->phpspecCommand);
         $process->setTty(true);
         $process->run();
 
-        return $process->isSuccessful();
+        if (!$process->isSuccessful()) {
+            $this->notifyError();
+
+            return;
+        }
+
+        $this->notifySuccess();
     }
 
     private function notifySuccess()

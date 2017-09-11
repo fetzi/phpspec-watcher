@@ -24,7 +24,8 @@ class WatchCommand extends Command
         $output = new SymfonyStyle($input, $output);
         $this->displayInfo($output);
 
-        WatcherFactory::create($output, Configuration::load())->start();
+        WatcherFactory::create($output, Configuration::load())
+            ->start();
     }
 
     private function displayInfo(OutputStyle $output)

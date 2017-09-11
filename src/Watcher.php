@@ -81,7 +81,7 @@ class Watcher
                     $this->notifyError();
                 }
 
-                $this->output->newLine(2);
+                $this->output->newLine();
                 $this->output->writeln('waiting for changes ...');
             }
         });

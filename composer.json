@@ -13,11 +13,11 @@
     "homepage": "https://github.com/fetzi/phpspec-watcher",
     "require": {
         "php": "^7.0",
-        "jolicode/jolinotif": "^1.2",
+        "jolicode/jolinotif": "^1.2 || ^2.0.0",
         "react/event-loop": "^0.4.3",
-        "symfony/console": "^3.0",
-        "symfony/process": "^3.0",
-        "symfony/yaml": "^3.0",
+        "symfony/console": "^3.2 || ^4.0",
+        "symfony/process": "^3.2 || ^4.0",
+        "symfony/yaml": "^3.2 || ^4.0",
         "yosymfony/resource-watcher": "^1.2"
     },
     "autoload": {

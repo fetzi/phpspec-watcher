@@ -6,13 +6,13 @@ use Joli\JoliNotif\NotifierFactory;
 
 class Notification
 {
-    const ICON_SUCCESS = 'success.png';
-    const ICON_ERROR = 'error.png';
+    public const ICON_SUCCESS = 'success.png';
+    public const ICON_ERROR = 'error.png';
 
     private $body;
     private $icon;
 
-    public static function create(string $body, string $icon) : self
+    public static function create(string $body, string $icon): self
     {
         return new static($body, $icon);
     }
@@ -29,7 +29,7 @@ class Notification
         $notification
             ->setTitle('PHPSpec Watcher')
             ->setBody($this->body)
-            ->setIcon(__DIR__.'/../assets/'.$this->icon);
+            ->setIcon(__DIR__ . '/../assets/' . $this->icon);
 
         NotifierFactory::create()->send($notification);
     }

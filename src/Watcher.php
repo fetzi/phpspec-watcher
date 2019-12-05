@@ -2,12 +2,10 @@
 
 namespace Fetzi\PhpspecWatcher;
 
+use Clue\React\Stdio\Stdio;
 use React\EventLoop\LoopInterface;
 use Symfony\Component\Console\Style\OutputStyle;
-use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
-use Yosymfony\ResourceWatcher\ResourceCacheMemory;
-use Yosymfony\ResourceWatcher\ResourceWatcher;
 
 class Watcher
 {
@@ -17,14 +15,14 @@ class Watcher
     private $output;
 
     /**
-     * @var Finder
-     */
-    private $finder;
-
-    /**
      * @var LoopInterface
      */
     private $loop;
+
+    /**
+     * @var Stdio
+     */
+    private $stdio;
 
     /**
      * @var int
@@ -46,18 +44,25 @@ class Watcher
      */
     private $notifyOnError;
 
+    /**
+     * @var FileWatcher
+     */
+    private $fileWatcher;
+
     public function __construct(
         OutputStyle $output,
-        Finder $finder,
+        FileWatcher $fileWatcher,
         LoopInterface $loop,
+        Stdio $stdio,
         int $checkInterval,
         string $phpspecCommand,
         bool $notifyOnSuccess,
         bool $notifyOnError
     ) {
         $this->output = $output;
-        $this->finder = $finder;
+        $this->fileWatcher = $fileWatcher;
         $this->loop = $loop;
+        $this->stdio = $stdio;
         $this->checkInterval = $checkInterval;
         $this->phpspecCommand = $phpspecCommand;
         $this->notifyOnSuccess = $notifyOnSuccess;
@@ -66,43 +71,47 @@ class Watcher
 
     public function start()
     {
-        $resourceCache = new ResourceCacheMemory();
-        $resourceWatcher = new ResourceWatcher($resourceCache);
-        $resourceWatcher->setFinder($this->finder);
-
-        $this->loop->addPeriodicTimer($this->checkInterval, function () use ($resourceWatcher) {
-            $resourceWatcher->findChanges();
-
-            if ($resourceWatcher->hasChanges()) {
-                $this->output->writeln('starting tests');
-
+        $executeFunc = function () {
+            if ($this->fileWatcher->hasChanges()) {
                 $this->runTests();
-
-                $this->output->newLine();
-                $this->output->writeln('waiting for changes ...');
             }
+        };
+
+        $this->stdio->on('t', function () {
+            $this->runTests();
         });
+        $this->loop->addPeriodicTimer($this->checkInterval, $executeFunc);
 
         $this->loop->run();
     }
 
     private function runTests()
     {
+        $this->output->writeln(sprintf('Starting tests (<fg=cyan>%s</>)', $this->phpspecCommand));
+        $this->output->newLine();
+
         $process = new Process($this->phpspecCommand);
         $process->setTty(true);
         $process->run();
 
-        if (!$process->isSuccessful()) {
+        if ($process->isSuccessful()) {
+            $this->notifySuccess();
+        } else {
             $this->notifyError();
-
-            return;
         }
 
-        $this->notifySuccess();
+        $this->output->newLine();
+        $this->output->write('Waiting for changes, ');
+        $this->output->write('<fg=yellow>to manually trigger a test execution');
+        $this->output->write('please press <fg=yellow;options=bold>"t"</></>');
+        $this->output->newLine(2);
     }
 
     private function notifySuccess()
     {
+        $this->output->newLine();
+        $this->output->writeln('<fg=green;options=bold>All tests passed!</>');
+
         if ($this->notifyOnSuccess) {
             Notification::create(
                 'Tests passed',
@@ -113,6 +122,9 @@ class Watcher
 
     private function notifyError()
     {
+        $this->output->newLine();
+        $this->output->writeln('<fg=red;options=bold>Test exection failed!</>');
+
         if ($this->notifyOnError) {
             Notification::create(
                 'Tests failed',

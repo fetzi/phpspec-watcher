@@ -1,9 +1,10 @@
 # phpspec Watcher
 
 [![Packagist](https://img.shields.io/packagist/v/fetzi/phpspec-watcher.svg?style=flat-square)](https://packagist.org/packages/fetzi/phpspec-watcher)
+[![Github Actions](https://github.com/fetzi/phpspec-watcher/workflows/Build/badge.svg)](https://github.com/fetzi/phpspec-watcher/actions)
 [![StyleCI](https://styleci.io/repos/102859380/shield?branch=master)](https://styleci.io/repos/102859380)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/fe3f8dba-15da-4527-a333-1a392d10673d.svg?style=flat-square)](https://insight.sensiolabs.com/projects/fe3f8dba-15da-4527-a333-1a392d10673d)
-[![Code Climate](https://img.shields.io/codeclimate/github/fetzi/phpspec-watcher.svg?style=flat-square)](https://codeclimate.com/github/fetzi/phpspec-watcher)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a16e78089225f977d475/maintainability)](https://codeclimate.com/github/fetzi/phpspec-watcher/maintainability)
 
 
 ## Introduction
@@ -49,7 +50,7 @@ directories:                        # a list of directories that should be watch
     - app
     - src
     - spec
-    
+
 phpspec:
     binary: vendor/bin/phpspec      # path to the phpspec binary
     arguments: [format=dot]         # additional phpspec arguments

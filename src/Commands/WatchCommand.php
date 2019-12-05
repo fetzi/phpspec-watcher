@@ -26,12 +26,15 @@ class WatchCommand extends Command
 
         WatcherFactory::create($output, Configuration::load())
             ->start();
+
+        return 0;
     }
 
     private function displayInfo(OutputStyle $output)
     {
         $output->title('PHPSpec Watcher');
         $output->text('PHPSpec tests will be automatically executed when a source or test file changes.');
+        $output->text('To manually trigger a test execution please press "t".');
         $output->newLine();
     }
 }

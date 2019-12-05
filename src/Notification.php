@@ -6,8 +6,8 @@ use Joli\JoliNotif\NotifierFactory;
 
 class Notification
 {
-    protected const ICON_SUCCESS = 'success.png';
-    protected const ICON_ERROR = 'error.png';
+    public const ICON_SUCCESS = 'success.png';
+    public const ICON_ERROR = 'error.png';
 
     private $body;
     private $icon;

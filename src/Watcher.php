@@ -101,9 +101,10 @@ class Watcher
         }
 
         $this->output->newLine();
-        $this->output->write('Waiting for changes, <fg=yellow>to manually trigger a test execution
-        please press <fg=yellow;options=bold>"t"</></>');
-        $this->output->newLine();
+        $this->output->write('Waiting for changes, ');
+        $this->output->write('<fg=yellow>to manually trigger a test execution');
+        $this->output->write('please press <fg=yellow;options=bold>"t"</></>');
+        $this->output->newLine(2);
     }
 
     private function notifySuccess()

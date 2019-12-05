@@ -10,7 +10,7 @@ class WatcherApplication extends Application
 {
     public function __construct()
     {
-        parent::__construct('PHPSpec Watcher', '1.0');
+        parent::__construct('PHPSpec Watcher', '2.0');
 
         $this->add(new WatchCommand());
         $this->add(new InitCommand());

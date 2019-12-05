@@ -12,18 +12,32 @@
     "license": "MIT",
     "homepage": "https://github.com/fetzi/phpspec-watcher",
     "require": {
-        "php": "^7.0",
-        "jolicode/jolinotif": "^1.2 || ^2.0.0",
-        "react/event-loop": "^0.4.3",
-        "symfony/console": "^3.2 || ^4.0",
-        "symfony/process": "^3.2 || ^4.0",
-        "symfony/yaml": "^3.2 || ^4.0",
-        "yosymfony/resource-watcher": "^1.2"
+        "php": "^7.2",
+        "clue/stdio-react": "^2.3",
+        "jolicode/jolinotif": "^2.0.",
+        "react/event-loop": "^1.1",
+        "symfony/console": "^4.0 || ^5.0",
+        "symfony/finder": "^4.0 || ^5.0",
+        "symfony/process": "^4.0 || ^5.0",
+        "symfony/yaml": "^4.0 || ^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload": {
         "psr-4": {
             "Fetzi\\PhpspecWatcher\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Fetzi\\PhpspecWatcher\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "lint": "vendor/bin/phpcs --standard=PSR2,PSR12 src/"
     },
     "config": {
         "sort-packages": true

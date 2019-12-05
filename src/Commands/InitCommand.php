@@ -23,12 +23,14 @@ class InitCommand extends Command
         if (Configuration::exists()) {
             $output->error('Configuration file already exists!');
 
-            return;
+            return 1;
         }
 
         Configuration::initialize();
         $output->success(
             sprintf('Successfully created the configuration file %s', Configuration::getConfigPath())
         );
+
+        return 0;
     }
 }

@@ -1,4 +1,4 @@
-name: PHP Composer
+name: Build
 
 on: [push]
 
@@ -10,7 +10,7 @@ jobs:
       matrix:
         php: [7.2, 7.3, 7.4]
 
-    name: PHP${{ matrix.php }}
+    name: PHP ${{ matrix.php }}
 
     steps:
     - uses: actions/checkout@v1
@@ -19,6 +19,7 @@ jobs:
       uses: shivammathur/setup-php@v1
       with:
         php-version: ${{ matrix.php }}
+        extension-csv: mbstring
         coverage: none
 
     - name: Check PHP version

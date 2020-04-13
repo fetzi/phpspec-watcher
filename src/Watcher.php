@@ -90,7 +90,7 @@ class Watcher
         $this->output->writeln(sprintf('Starting tests (<fg=cyan>%s</>)', $this->phpspecCommand));
         $this->output->newLine();
 
-        $process = new Process($this->phpspecCommand);
+        $process = new Process(explode(' ', $this->phpspecCommand));
         $process->setTty(true);
         $process->run();
 
